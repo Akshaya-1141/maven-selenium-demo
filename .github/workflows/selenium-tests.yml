@@ -35,7 +35,7 @@ jobs:
   build-and-publish-docker:
     needs: selenium-test
     runs-on: ubuntu-latest
-    if: github.event_name == 'push' # Only push to registry on formal merges/pushes
+    if: github.event_name == 'push' && secrets.DOCKERHUB_USERNAME != '' && secrets.DOCKERHUB_TOKEN != '' # Only run when Docker Hub credentials are available
     steps:
       - name: Checkout source code
         uses: actions/checkout@v4
